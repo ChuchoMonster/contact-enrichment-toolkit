@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Verified Lead Lists — Up to 1,000 Leads | ColdStart</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200;300;400;500;600;700;800;900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+  <canvas id="cube-canvas"></canvas>
+  <div class="grain"></div>
+
+  <!-- Header -->
+  <header class="site-header" id="site-header">
+    <nav>
+      <a href="https://www.coldstartb2b.com" class="nav-logo">Cold<span class="brand-accent">Start</span></a>
+      <div class="nav-links">
+        <a href="#form-section">Get Leads</a>
+        <a href="https://www.coldstartb2b.com" target="_blank">About</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <div class="hero-text" id="hero-text">
+    <p class="hero-label">AI-Enhanced Lead Generation</p>
+    <h1 class="hero-heading">
+      <span class="line">Up to 1,000 Verified Leads.</span>
+      <span class="line accent">Free.</span>
+    </h1>
+    <p class="hero-sub">We find decision-makers with verified emails and LinkedIn profiles — delivered straight to your inbox.</p>
+    <div class="hero-ctas">
+      <a href="#form-section" class="cta-btn">Get My Free Leads</a>
+    </div>
+  </div>
+
+  <div class="scroll-hint" id="scroll-hint">
+    <div class="scroll-hint-line"></div>
+  </div>
+
+  <!-- Form Section -->
+  <div class="scroll-content">
+    <section class="cta-section" id="form-section">
+      <div class="cta-split">
+        <div class="cta-left">
+          <h2 class="cta-heading">
+            <span class="line">Define Your ICP.</span>
+            <span class="line accent">We Do the Rest.</span>
+          </h2>
+          <p class="cta-body">Fill out the form and within minutes receive up to 1,000 leads with verified emails and LinkedIn profiles.</p>
+        </div>
+
+        <form class="cta-form" id="search-form">
+
+          <!-- Contact Info -->
+          <fieldset class="form-fieldset">
+            <legend>Your Information</legend>
+            <div class="form-row">
+              <div class="form-group">
+                <label>First Name</label>
+                <input type="text" id="first-name" placeholder="Jane" data-required>
+              </div>
+              <div class="form-group">
+                <label>Last Name</label>
+                <input type="text" id="last-name" placeholder="Smith" data-required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Company</label>
+                <input type="text" id="company-name" placeholder="Acme Inc" data-required>
+              </div>
+              <div class="form-group">
+                <label>Business Email</label>
+                <input type="email" id="email" placeholder="jane@example.com" data-required>
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- Company Search -->
+          <fieldset class="form-fieldset">
+            <legend>Company Search</legend>
+
+            <div class="form-group">
+              <label>Industry</label>
+              <div class="multi-select" id="industry-include-select">
+                <div class="multi-select-field" id="industry-field">
+                  <span class="multi-select-placeholder">Select industries...</span>
+                </div>
+                <div class="multi-select-dropdown" id="industry-dropdown">
+                  <!-- populated by JS -->
+                </div>
+              </div>
+            </div>
+
+            <div style="margin-top:1.5rem;"></div>
+
+            <div class="form-group">
+              <label>Company Size</label>
+              <div class="checkbox-group" id="employee-range-group">
+                <label><input type="checkbox" name="employee_range" value="1-10"> 1-10</label>
+                <label><input type="checkbox" name="employee_range" value="11-50"> 11-50</label>
+                <label><input type="checkbox" name="employee_range" value="51-200"> 51-200</label>
+                <label><input type="checkbox" name="employee_range" value="201-500"> 201-500</label>
+                <label><input type="checkbox" name="employee_range" value="501-1000"> 501-1K</label>
+                <label><input type="checkbox" name="employee_range" value="1001-5000"> 1K-5K</label>
+                <label><input type="checkbox" name="employee_range" value="5001-10000"> 5K-10K</label>
+                <label><input type="checkbox" name="employee_range" value="10001+"> 10K+</label>
+              </div>
+            </div>
+
+            <div style="margin-top:1.5rem;"></div>
+
+            <details>
+              <summary>Advanced Filters <small style="letter-spacing:0;text-transform:none;font-weight:400;color:var(--text-muted);">(optional)</small></summary>
+
+              <div class="form-group">
+                <label>Exclude Industry</label>
+                <div class="multi-select" id="industry-exclude-container">
+                  <div class="multi-select-field" id="industry-exclude-field">
+                    <span class="multi-select-placeholder">Select industries to exclude...</span>
+                  </div>
+                  <div class="multi-select-dropdown" id="industry-exclude-dropdown"></div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Company Type</label>
+                <div class="checkbox-group">
+                  <label><input type="checkbox" name="type_include" value="Privately Held"> Privately Held</label>
+                  <label><input type="checkbox" name="type_include" value="Partnership"> Partnership</label>
+                  <label><input type="checkbox" name="type_include" value="Public Company"> Public</label>
+                  <label><input type="checkbox" name="type_include" value="Nonprofit"> Nonprofit</label>
+                  <label><input type="checkbox" name="type_include" value="Government Agency"> Gov Agency</label>
+                  <label><input type="checkbox" name="type_include" value="Educational"> Educational</label>
+                  <label><input type="checkbox" name="type_include" value="Self-Employed"> Self-Employed</label>
+                  <label><input type="checkbox" name="type_include" value="Sole Proprietorship"> Sole Prop</label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Exclude Company Type</label>
+                <div class="checkbox-group">
+                  <label><input type="checkbox" name="type_exclude" value="Privately Held"> Privately Held</label>
+                  <label><input type="checkbox" name="type_exclude" value="Partnership"> Partnership</label>
+                  <label><input type="checkbox" name="type_exclude" value="Public Company"> Public</label>
+                  <label><input type="checkbox" name="type_exclude" value="Nonprofit"> Nonprofit</label>
+                  <label><input type="checkbox" name="type_exclude" value="Government Agency"> Gov Agency</label>
+                  <label><input type="checkbox" name="type_exclude" value="Educational"> Educational</label>
+                  <label><input type="checkbox" name="type_exclude" value="Self-Employed"> Self-Employed</label>
+                  <label><input type="checkbox" name="type_exclude" value="Sole Proprietorship"> Sole Prop</label>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Keywords Include <small>(separated by commas)</small></label>
+                  <div class="tag-input-wrap" id="keywords-include-tags">
+                    <input type="text" placeholder="e.g. legal tech, SaaS">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Keywords Exclude <small>(separated by commas)</small></label>
+                  <div class="tag-input-wrap" id="keywords-exclude-tags">
+                    <input type="text" placeholder="e.g. nonprofit">
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Founded Year Min</label>
+                  <input type="number" id="founded-min" min="1900" max="2026">
+                </div>
+                <div class="form-group">
+                  <label>Founded Year Max</label>
+                  <input type="number" id="founded-max" min="1900" max="2026">
+                </div>
+                <div class="form-group">
+                  <label>Min LinkedIn Followers</label>
+                  <input type="number" id="min-followers" min="0">
+                </div>
+              </div>
+            </details>
+          </fieldset>
+
+          <!-- Target Roles -->
+          <fieldset class="form-fieldset">
+            <legend>Target Roles</legend>
+            <div class="form-group">
+              <label>Job Titles <small>(press Enter to add)</small></label>
+              <div class="tag-input-wrap" id="title-include-tags">
+                <input type="text" placeholder="e.g. CMO, VP Marketing, CEO">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Exclude Titles <small>(optional)</small></label>
+              <input type="text" id="title-exclude" value="analyst, associate, coordinator, assistant, intern, junior, student" placeholder="analyst, associate, intern...">
+            </div>
+          </fieldset>
+
+          <button type="submit" class="form-submit-btn" id="start-btn">Get My Free Leads</button>
+        </form>
+      </div>
+    </section>
+  </div>
+
+  <!-- CDN Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160/examples/jsm/"
+    }
+  }
+  </script>
+  <script type="module" src="/static/js/app.js"></script>
+
+  <script>
+  /* --- Header scroll --- */
+  var header = document.getElementById("site-header");
+  window.addEventListener("scroll", function() {
+    header.classList.toggle("scrolled", window.scrollY > 40);
+  });
+
+  /* --- GSAP --- */
+  gsap.registerPlugin(ScrollTrigger);
+
+  var isMob = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || window.innerWidth < 768;
+  window._lenis = null;
+  if (!isMob) {
+    var lenis = new Lenis({ duration: 1.6, easing: function(t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); }, smoothWheel: true });
+    window._lenis = lenis;
+    lenis.on("scroll", ScrollTrigger.update);
+    gsap.ticker.add(function(time) { lenis.raf(time * 1000); });
+    gsap.ticker.lagSmoothing(0);
+  }
+
+  /* Hero entry */
+  var entryTl = gsap.timeline({ delay: 0.5 });
+  entryTl.to(".hero-label", { opacity: 1, duration: 0.8, ease: "power2.out" }, 0);
+  entryTl.to(".hero-heading .line", { opacity: 1, duration: 1.0, stagger: 0.12, ease: "power3.out" }, 0.3);
+  entryTl.to(".hero-sub", { opacity: 1, duration: 0.8, ease: "power2.out" }, 0.8);
+  entryTl.to(".hero-ctas", { opacity: 1, duration: 0.7, ease: "power2.out" }, 1.1);
+  entryTl.to(".scroll-hint", { opacity: 1, duration: 0.6, ease: "power2.out" }, 1.6);
+
+  /* Fade hero on scroll */
+  gsap.to("#hero-text", { opacity: 0, y: -20, scrollTrigger: { trigger: ".scroll-content", start: "top 95%", end: "top 60%", scrub: true } });
+  gsap.to("#scroll-hint", { opacity: 0, scrollTrigger: { trigger: ".scroll-content", start: "top 98%", end: "top 85%", scrub: true } });
+
+  /* Form section reveal */
+  gsap.to([".cta-heading", ".cta-body"], { opacity: 1, y: 0, duration: 0.9, stagger: 0.12, ease: "power3.out",
+    scrollTrigger: { trigger: ".cta-section", start: "top 60%", toggleActions: "play none none reverse" } });
+  gsap.to(".cta-form", { opacity: 1, y: 0, duration: 0.9, delay: 0.2, ease: "power3.out",
+    scrollTrigger: { trigger: ".cta-section", start: "top 60%", toggleActions: "play none none reverse" } });
+  </script>
+
+  <script>
+  /* ============================================
+     Form Logic
+     ============================================ */
+
+  const INDUSTRIES = [
+  "Accounting","Airlines and Aviation","Alternative Medicine","Animation","Apparel and Fashion",
+  "Architecture and Planning","Arts and Crafts","Automotive","Aviation and Aerospace","Banking",
+  "Biotechnology","Broadcast Media","Building Materials","Business Supplies and Equipment",
+  "Capital Markets","Chemicals","Civic and Social Organization","Civil Engineering",
+  "Commercial Real Estate","Computer and Network Security","Computer Games","Computer Hardware",
+  "Computer Networking","Computer Software","Construction","Consumer Electronics","Consumer Goods",
+  "Consumer Services","Cosmetics","Dairy","Defense and Space","Design","E-Learning",
+  "Education Management","Electrical/Electronic Manufacturing","Entertainment","Environmental Services",
+  "Events Services","Executive Office","Facilities Services","Farming","Financial Services","Fine Art",
+  "Fishery","Food Production","Food and Beverages","Fundraising","Furniture","Gambling and Casinos",
+  "Glass, Ceramics and Concrete","Government Administration","Government Relations","Graphic Design",
+  "Health, Wellness and Fitness","Higher Education","Hospital and Health Care","Hospitality",
+  "Human Resources","Import and Export","Individual and Family Services","Industrial Automation",
+  "Information Services","Information Technology and Services","Insurance","International Affairs",
+  "International Trade and Development","Internet","Investment Banking","Investment Management",
+  "Judiciary","Law Enforcement","Law Practice","Legal Services","Legislative Office",
+  "Leisure, Travel and Tourism","Libraries","Logistics and Supply Chain","Luxury Goods and Jewelry",
+  "Machinery","Management Consulting","Maritime","Market Research","Marketing and Advertising",
+  "Mechanical or Industrial Engineering","Media Production","Medical Devices","Medical Practice",
+  "Mental Health Care","Military","Mining and Metals","Motion Pictures and Film",
+  "Museums and Institutions","Music","Nanotechnology","Newspapers",
+  "Non-Profit Organization Management","Oil and Energy","Online Media","Outsourcing/Offshoring",
+  "Package/Freight Delivery","Packaging and Containers","Paper and Forest Products","Performing Arts",
+  "Pharmaceuticals","Philanthropy","Photography","Plastics","Political Organization",
+  "Primary/Secondary Education","Printing","Professional Training and Coaching","Program Development",
+  "Public Policy","Public Relations and Communications","Public Safety","Publishing",
+  "Railroad Manufacture","Ranching","Real Estate","Recreational Facilities and Services",
+  "Religious Institutions","Renewables and Environment","Research","Restaurants","Retail",
+  "Security and Investigations","Semiconductors","Shipbuilding","Sporting Goods","Sports",
+  "Staffing and Recruiting","Supermarkets","Telecommunications","Textiles","Think Tanks","Tobacco",
+  "Translation and Localization","Transportation/Trucking/Railroad","Utilities",
+  "Venture Capital and Private Equity","Veterinary","Warehousing","Wholesale","Wine and Spirits",
+  "Wireless","Writing and Editing"
+  ];
+
+  // Multi-select dropdown for industry
+  const industrySelected = [];
+  (function() {
+    const container = document.getElementById('industry-include-select');
+    const field = document.getElementById('industry-field');
+    const dropdown = document.getElementById('industry-dropdown');
+
+    INDUSTRIES.forEach(ind => {
+      const opt = document.createElement('div');
+      opt.className = 'ms-option';
+      opt.innerHTML = '<span class="ms-check"></span>' + ind;
+      opt.dataset.value = ind;
+      opt.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const idx = industrySelected.indexOf(ind);
+        if (idx >= 0) {
+          industrySelected.splice(idx, 1);
+          opt.classList.remove('selected');
+        } else {
+          industrySelected.push(ind);
+          opt.classList.add('selected');
+        }
+        renderField();
+      });
+      dropdown.appendChild(opt);
+    });
+
+    field.addEventListener('click', (e) => {
+      e.stopPropagation();
+      container.classList.toggle('open');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!container.contains(e.target)) container.classList.remove('open');
+    });
+
+    // Prevent page scroll when scrolling inside dropdown
+    dropdown.addEventListener('wheel', (e) => {
+      const atTop = dropdown.scrollTop === 0 && e.deltaY < 0;
+      const atBottom = dropdown.scrollTop + dropdown.clientHeight >= dropdown.scrollHeight && e.deltaY > 0;
+      if (!atTop && !atBottom) {
+        e.stopPropagation();
+      }
+    }, { passive: false });
+
+    // Also stop Lenis from hijacking scroll inside dropdown
+    dropdown.addEventListener('mouseenter', () => {
+      if (window._lenis) window._lenis.stop();
+    });
+    dropdown.addEventListener('mouseleave', () => {
+      if (window._lenis) window._lenis.start();
+    });
+
+    function renderField() {
+      field.innerHTML = '';
+      if (industrySelected.length === 0) {
+        field.innerHTML = '<span class="multi-select-placeholder">Select industries...</span>';
+        return;
+      }
+      industrySelected.forEach((val, i) => {
+        const tag = document.createElement('span');
+        tag.className = 'tag';
+        tag.innerHTML = val + '<button type="button">&times;</button>';
+        tag.querySelector('button').addEventListener('click', (e) => {
+          e.stopPropagation();
+          industrySelected.splice(i, 1);
+          dropdown.querySelector('[data-value="' + val + '"]').classList.remove('selected');
+          renderField();
+        });
+        field.appendChild(tag);
+      });
+    }
+  })();
+
+  function getCheckedIndustries() {
+    return [...industrySelected];
+  }
+
+  // Multi-select dropdown for exclude industry (same pattern)
+  const industryExcludeSelected = [];
+  (function() {
+    const container = document.getElementById('industry-exclude-container');
+    const field = document.getElementById('industry-exclude-field');
+    const dropdown = document.getElementById('industry-exclude-dropdown');
+
+    INDUSTRIES.forEach(ind => {
+      const opt = document.createElement('div');
+      opt.className = 'ms-option';
+      opt.innerHTML = '<span class="ms-check"></span>' + ind;
+      opt.dataset.value = ind;
+      opt.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const idx = industryExcludeSelected.indexOf(ind);
+        if (idx >= 0) {
+          industryExcludeSelected.splice(idx, 1);
+          opt.classList.remove('selected');
+        } else {
+          industryExcludeSelected.push(ind);
+          opt.classList.add('selected');
+        }
+        renderExcludeField();
+      });
+      dropdown.appendChild(opt);
+    });
+
+    field.addEventListener('click', (e) => {
+      e.stopPropagation();
+      container.classList.toggle('open');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!container.contains(e.target)) container.classList.remove('open');
+    });
+
+    dropdown.addEventListener('wheel', (e) => {
+      const atTop = dropdown.scrollTop === 0 && e.deltaY < 0;
+      const atBottom = dropdown.scrollTop + dropdown.clientHeight >= dropdown.scrollHeight && e.deltaY > 0;
+      if (!atTop && !atBottom) e.stopPropagation();
+    }, { passive: false });
+    dropdown.addEventListener('mouseenter', () => { if (window._lenis) window._lenis.stop(); });
+    dropdown.addEventListener('mouseleave', () => { if (window._lenis) window._lenis.start(); });
+
+    function renderExcludeField() {
+      field.innerHTML = '';
+      if (industryExcludeSelected.length === 0) {
+        field.innerHTML = '<span class="multi-select-placeholder">Select industries to exclude...</span>';
+        return;
+      }
+      industryExcludeSelected.forEach((val, i) => {
+        const tag = document.createElement('span');
+        tag.className = 'tag';
+        tag.innerHTML = val + '<button type="button">&times;</button>';
+        tag.querySelector('button').addEventListener('click', (e) => {
+          e.stopPropagation();
+          industryExcludeSelected.splice(i, 1);
+          dropdown.querySelector('[data-value="' + val + '"]').classList.remove('selected');
+          renderExcludeField();
+        });
+        field.appendChild(tag);
+      });
+    }
+  })();
+
+  // Tag inputs for keywords
+  const keywordsInclude = createTagInput('keywords-include-tags');
+  const keywordsExclude = createTagInput('keywords-exclude-tags');
+
+  function createTagInput(containerId) {
+    const container = document.getElementById(containerId);
+    const input = container.querySelector('input');
+    const tags = [];
+
+    function addTag(text) {
+      text = text.trim();
+      if (!text || tags.includes(text)) return;
+      tags.push(text);
+      renderTags();
+    }
+
+    function renderTags() {
+      container.querySelectorAll('.tag').forEach(t => t.remove());
+      tags.forEach((text, i) => {
+        const tag = document.createElement('span');
+        tag.className = 'tag';
+        tag.innerHTML = text + '<button type="button">&times;</button>';
+        tag.querySelector('button').onclick = () => { tags.splice(i, 1); renderTags(); };
+        container.insertBefore(tag, input);
+      });
+    }
+
+    input.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ',') { e.preventDefault(); addTag(input.value); input.value = ''; }
+      if (e.key === 'Backspace' && !input.value && tags.length) { tags.pop(); renderTags(); }
+    });
+    container.addEventListener('click', () => input.focus());
+    return { getTags: () => [...tags] };
+  }
+
+  const titleInclude = createTagInput('title-include-tags');
+
+  function parseComma(val) { return val ? val.split(',').map(s => s.trim()).filter(Boolean) : []; }
+
+  // Inline validation helpers
+  function clearErrors() {
+    document.querySelectorAll('.form-group.has-error').forEach(g => g.classList.remove('has-error'));
+    document.querySelectorAll('.form-error-msg').forEach(m => m.remove());
+  }
+
+  function showError(el, msg) {
+    const group = el.closest('.form-group');
+    if (!group) return;
+    group.classList.add('has-error');
+    const err = document.createElement('div');
+    err.className = 'form-error-msg';
+    err.textContent = msg;
+    group.appendChild(err);
+  }
+
+  document.getElementById('search-form').addEventListener('submit', async e => {
+    e.preventDefault();
+    clearErrors();
+
+    const industries = getCheckedIndustries();
+    const employeeRanges = [...document.querySelectorAll('#employee-range-group input:checked')].map(c => c.value);
+    const titles = titleInclude.getTags();
+    const emailVal = document.getElementById('email').value.trim();
+
+    let valid = true;
+    if (!document.getElementById('first-name').value.trim()) { showError(document.getElementById('first-name'), 'This field is required.'); valid = false; }
+    if (!document.getElementById('last-name').value.trim()) { showError(document.getElementById('last-name'), 'This field is required.'); valid = false; }
+    if (!document.getElementById('company-name').value.trim()) { showError(document.getElementById('company-name'), 'This field is required.'); valid = false; }
+    if (!emailVal || !emailVal.includes('@')) { showError(document.getElementById('email'), 'This field is required.'); valid = false; }
+    if (!industries.length) { showError(document.getElementById('industry-field'), 'This field is required.'); valid = false; }
+    if (!employeeRanges.length) { showError(document.getElementById('employee-range-group'), 'This field is required.'); valid = false; }
+    if (!titles.length) { showError(document.querySelector('#title-include-tags input'), 'This field is required.'); valid = false; }
+    if (!valid) { document.querySelector('.has-error')?.scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
+
+    // Conflict resolution: if same item is in include and exclude, keep include only
+    const rawIndustryExclude = [...industryExcludeSelected].filter(x => !industries.includes(x));
+    const rawTypeInclude = [...document.querySelectorAll('[name=type_include]:checked')].map(c => c.value);
+    const rawTypeExclude = [...document.querySelectorAll('[name=type_exclude]:checked')].map(c => c.value).filter(x => !rawTypeInclude.includes(x));
+    const rawKwInclude = keywordsInclude.getTags();
+    const rawKwExclude = keywordsExclude.getTags().filter(x => !rawKwInclude.includes(x));
+
+    const payload = {
+      first_name: document.getElementById('first-name').value.trim(),
+      last_name: document.getElementById('last-name').value.trim(),
+      company_name: document.getElementById('company-name').value.trim(),
+      email: emailVal,
+      industry_include: industries,
+      industry_exclude: rawIndustryExclude,
+      employee_range: employeeRanges,
+      country_code: "US",
+      city_include: [],
+      city_exclude: [],
+      type_include: rawTypeInclude,
+      type_exclude: rawTypeExclude,
+      keywords_include: rawKwInclude,
+      keywords_exclude: rawKwExclude,
+      founded_year_min: document.getElementById('founded-min').value || null,
+      founded_year_max: document.getElementById('founded-max').value || null,
+      min_linkedin_followers: document.getElementById('min-followers').value || null,
+      include_title: titles,
+      exclude_title: parseComma(document.getElementById('title-exclude').value),
+    };
+
+    document.getElementById('start-btn').disabled = true;
+    document.getElementById('start-btn').textContent = 'Submitting...';
+
+    try {
+      const resp = await fetch('/api/jobs', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(payload),
+      });
+      const data = await resp.json();
+      if (data.errors) {
+        alert(data.errors.join('\n'));
+        document.getElementById('start-btn').disabled = false;
+        document.getElementById('start-btn').textContent = 'Get My Free Leads';
+        return;
+      }
+      window.location.href = '/thank-you';
+    } catch (err) {
+      alert('Something went wrong. Please try again.');
+      document.getElementById('start-btn').disabled = false;
+      document.getElementById('start-btn').textContent = 'Get My Free Leads';
+    }
+  });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,9 @@
+.env
+*.db
+*_checkpoint.json
+*_results.csv
+*_pipeline.log
+__pycache__
+.git
+*.pyc
+CLAUDE.md

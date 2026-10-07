@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Leads Are On The Way — ColdStart</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200;300;400;500;600;700;800;900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/style.css">
+  <style>
+    .page-wrap {
+      position: relative;
+      z-index: 10;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 2rem;
+    }
+
+    .card {
+      max-width: 560px;
+      width: 100%;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 14px;
+      background: rgba(139, 156, 247, 0.1);
+      border: 1px solid rgba(139, 156, 247, 0.25);
+      border-radius: 100px;
+      font-family: var(--font-body);
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 2rem;
+      opacity: 0;
+    }
+
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 1.8s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.75); }
+    }
+
+    .headline {
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 4.5vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.025em;
+      color: var(--text);
+      margin-bottom: 0.75rem;
+      opacity: 0;
+    }
+
+    .headline .accent { color: var(--accent); }
+
+    .sub {
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: var(--text-body);
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+      max-width: 480px;
+      opacity: 0;
+    }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, rgba(139, 156, 247, 0.35), rgba(139, 156, 247, 0.05) 70%, transparent);
+      margin-bottom: 2rem;
+      opacity: 0;
+    }
+
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      margin-bottom: 2.5rem;
+      opacity: 0;
+    }
+
+    .step {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 12px;
+      padding: 1.1rem 1.25rem;
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+
+    .step:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .step-num {
+      font-family: var(--font-body);
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      background: rgba(139, 156, 247, 0.1);
+      border: 1px solid rgba(139, 156, 247, 0.2);
+      border-radius: 6px;
+      width: 26px;
+      height: 26px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .step-text {
+      font-size: 0.88rem;
+      line-height: 1.6;
+      color: var(--text-muted);
+    }
+
+    .step-text strong {
+      color: var(--text);
+      font-weight: 500;
+      display: block;
+      margin-bottom: 2px;
+      font-size: 0.92rem;
+    }
+
+    .step-text .email-highlight {
+      color: var(--accent);
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 400;
+    }
+
+    .step-meta {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 0.03em;
+      color: var(--text-dim);
+      margin-top: 4px;
+      display: block;
+    }
+
+    .ty-cta-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 0.9rem 2rem;
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      color: var(--bg);
+      background: var(--text);
+      border: none;
+      border-radius: 100px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.4s ease, transform 0.3s ease, box-shadow 0.3s ease;
+      opacity: 0;
+    }
+
+    .ty-cta-btn:hover {
+      background: var(--accent);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 30px rgba(139, 156, 247, 0.2);
+    }
+
+    .cta-arrow {
+      font-size: 16px;
+      line-height: 1;
+    }
+
+    .footer-note {
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: var(--text-dim);
+      text-align: center;
+      margin-top: 1.25rem;
+      opacity: 0;
+    }
+
+    @media (max-width: 768px) {
+      .page-wrap { padding: 3rem 1.5rem; }
+      .headline { font-size: clamp(1.6rem, 6vw, 2.2rem); }
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="cube-canvas"></canvas>
+  <div class="grain"></div>
+
+  <div class="page-wrap">
+    <div class="card">
+
+      <div class="badge">
+        <div class="badge-dot"></div>
+        Request received
+      </div>
+
+      <h1 class="headline">Your leads are<br><span class="accent">on the way.</span></h1>
+      <p class="sub">Contacts matched to your criteria — being processed and packaged now.</p>
+
+      <div class="divider"></div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">01</div>
+          <div class="step-text">
+            <strong>Check your inbox</strong>
+            Your CSV will arrive shortly <span class="email-highlight">by email</span>
+            <span class="step-meta">Allow a few minutes for processing</span>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">02</div>
+          <div class="step-text">
+            <strong>Don't see it? Check spam</strong>
+            First-time senders sometimes get filtered. Move it to your inbox and you're good.
+            <span class="step-meta">Gmail / Outlook / Apple Mail — same deal</span>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">03</div>
+          <div class="step-text">
+            <strong>Think bigger than leads</strong>
+            Lead gen is one thing AI can automate. Enrichment, outreach, research, ops — there's a lot more on the table.
+            <span class="step-meta">That's what ColdStart is built for</span>
+          </div>
+        </div>
+      </div>
+
+      <a class="ty-cta-btn" href="https://www.coldstartb2b.com">
+        See what else we can automate <span class="cta-arrow">&rarr;</span>
+      </a>
+
+      <p class="footer-note">// Book time to talk AI automation for your business</p>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160/examples/jsm/"
+    }
+  }
+  </script>
+  <script type="module" src="/static/js/app.js"></script>
+  <script>
+    var tl = gsap.timeline({ delay: 0.4 });
+    tl.to(".badge", { opacity: 1, duration: 0.6, ease: "power2.out" }, 0);
+    tl.to(".headline", { opacity: 1, duration: 0.8, ease: "power3.out" }, 0.15);
+    tl.to(".sub", { opacity: 1, duration: 0.7, ease: "power2.out" }, 0.4);
+    tl.to(".divider", { opacity: 1, duration: 0.5, ease: "power2.out" }, 0.6);
+    tl.to(".steps", { opacity: 1, duration: 0.8, ease: "power3.out" }, 0.75);
+    tl.to(".ty-cta-btn", { opacity: 1, duration: 0.6, ease: "power2.out" }, 1.0);
+    tl.to(".footer-note", { opacity: 1, duration: 0.5, ease: "power2.out" }, 1.2);
+  </script>
+</body>
+</html>

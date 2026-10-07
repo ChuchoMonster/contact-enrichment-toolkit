@@ -1,0 +1,5 @@
+# Test-only dependencies. Runtime deps come from requirements-web.txt.
+-r requirements-web.txt
+pytest==9.1.1
+responses==0.26.3   # mocks every `requests` call; unmatched requests raise
+httpx2==2.13.1      # HTTP client behind fastapi.testclient

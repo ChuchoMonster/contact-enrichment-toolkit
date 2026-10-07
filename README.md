@@ -1,5 +1,7 @@
 # Contact Enrichment Toolkit
 
+![tests](https://github.com/ChuchoMonster/contact-enrichment-toolkit/actions/workflows/tests.yml/badge.svg)
+
 A set of Python pipelines, plus a small deployed web app, that turn a target-market
 definition (a list of domains, a company search, or a Google Maps query) into a list of
 decision-makers with personal LinkedIn URLs and verified work emails, using the
@@ -80,6 +82,26 @@ fly deploy                                    # needs a Fly volume named blitz_d
 
 Each pipeline's input filename is set near the top of the script (`INPUT_FILE`).
 `examples/sample_input.csv` shows the minimal `domain` / `contact_name` shape.
+
+## Tests
+
+The suite runs offline with no API keys: every HTTP call is mocked, and a guard fails
+any test that tries to open a real network connection.
+
+- **API client**: request building, `Retry-After` and exponential backoff, response shapes
+  for company search, people search and email enrichment.
+- **Pipeline runner**: company paging and oversampling caps, skipping companies with no
+  LinkedIn page, stopping once enough verified emails are found, cancellation.
+- **Web app**: form validation, the search payload built from optional filters, the
+  per-domain submission limit, job storage in SQLite, and the results CSV and email
+  (Blitz, Slack and the `gws` CLI are all faked).
+- **Script helpers**: job-title filters (and a check that the copies in each template
+  agree), name matching, URL/domain normalisation, checkpoint save and resume.
+
+```bash
+pip install -r requirements-dev.txt
+python -m pytest
+```
 
 ## Environment variables
 
